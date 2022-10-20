@@ -34,3 +34,5 @@ such as:
 - yq (notice there is python and golang versions)
 - [conftest](https://www.conftest.dev/)
 - some apps have syntax checking command switch
+
+If config-reloader cannot reload the configuration, you may need to check the container logs.
