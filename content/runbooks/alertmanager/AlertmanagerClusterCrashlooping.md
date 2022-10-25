@@ -16,18 +16,18 @@ Alerts could be notified multiple time unless pods are crashing to fast and no a
 ## Diagnosis
 
 ```shell
-kubectl get pod -l app=alertmanager
+$ kubectl -n kubesphere-monitoring-system get pod -l app.kubernetes.io/name=alertmanager
 
-NAMESPACE   NAME                    READY   STATUS              RESTARTS    AGE
-default     alertmanager-main-0     1/2     CrashLoopBackOff    37107 2d
-default     alertmanager-main-1     2/2     Running             0 43d
-default     alertmanager-main-2     2/2     Running             0 43d 
+NAMESPACE                        NAME                    READY   STATUS              RESTARTS    AGE
+kubesphere-monitoring-system     alertmanager-main-0     1/2     CrashLoopBackOff    37107       2d
+kubesphere-monitoring-system     alertmanager-main-1     2/2     Running             0 43d
+kubesphere-monitoring-system     alertmanager-main-2     2/2     Running             0 43d 
 ```
 
 Find the root cause by looking to events for a given pod/deployement
 
 ```shell
-kubectl get events --field-selector involvedObject.name=alertmanager-main-0
+$ kubectl -n kubesphere-monitoring-system get events --field-selector involvedObject.name=alertmanager-main-0
 ```
 
 ## Mitigation

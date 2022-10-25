@@ -19,13 +19,10 @@ unless `AlertmanagerClusterFailedToSendAlerts` is also triggerd for the same int
 Verify the amount of failed notification per alert-manager-[instance] for
 a specific integration.
 
-You can look metrics exposed in prometheus console using promQL.
-For exemple the following query will display the number of failed
-notifications per instance for pager duty integration.
-We have 3 instances involved in the example bellow.
+You can look metrics exposed in prometheus console using promQL. For example the following query will display the number of failed notifications per instance for webhook integration (eg. notification-manager). We have 3 instances involved in the example bellow.
 
 ```promql
-rate(alertmanager_notifications_total{integration="pagerduty"}[5m])
+rate(alertmanager_notifications_failed_total{integration="webhook"}[5m])
 ```
 
 ![image](https://user-images.githubusercontent.com/3153333/143552468-ff573f1a-19a6-44ea-9c85-631687d01bf9.png)
@@ -39,5 +36,5 @@ Depending on the integration, you can have a look to alert-manager logs
 and act (network, authorization token, firewall...)
 
 ```shell
-kubectl -n monitoring logs -l 'alertmanager=main' -c alertmanager
+$ kubectl -n kubesphere-monitoring-system logs -l 'alertmanager=main' -c alertmanager
 ```
