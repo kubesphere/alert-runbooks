@@ -22,12 +22,16 @@ Verify if there is an error in `config-reloader` container logs.
 Here an example with network issues.
 
 ```bash
-$ kubectl logs sts/alertmanager-main -c config-reloader
+$ kubectl -n kubesphere-monitoring-system logs sts/alertmanager-main -c config-reloader
 
 level=error ts=2021-09-24T11:24:52.69629226Z caller=runutil.go:101 msg="function failed. Retrying in next tick" err="trigger reload: reload request failed: Post \"http://localhost:9093/alertmanager/-/reload\": dial tcp [::1]:9093: connect: connection refused"
 ```
 
 You can also verify directly `alertmanager.yaml` file (default: `/etc/alertmanager/config/alertmanager.yaml`).
+
+```bash
+$ kubectl -n kubesphere-monitoring-system exec alertmanager-main-0 -c alertmanager -- amtool check-config /etc/alertmanager/config/alertmanager.yaml
+```
 
 ## Mitigation
 
