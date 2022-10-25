@@ -1,3 +1,8 @@
+---
+title: Etcd Insufficient Members
+weight: 20
+---
+
 # etcdInsufficientMembers
 
 ## Meaning
@@ -9,7 +14,7 @@ This means that etcd cluster has not enough members in the cluster to create quo
 ## Impact
 
 When etcd does not have a majority of instances available the Kubernetes and
-OpenShift APIs will reject read and write requests and operations that preserve
+KubeSphere APIs will reject read and write requests and operations that preserve
 the health of workloads cannot be performed.
 
 In general loosing quorum will switch etcd to read only, which effectively renders k8s api read only.
@@ -17,7 +22,7 @@ It is possible to read the current state, but not possible to update it.
 
 ## Diagnosis
 
-This can kubectlcur multiple control plane nodes are powered off or are unable to
+It is possible that multiple control plane nodes are powered off or are unable to
 connect each other via the network. Check that all control plane nodes are
 powered and that network connections between each machine are functional.
 
@@ -33,14 +38,7 @@ $ kubectl get nodes -l node-role.kubernetes.io/master=
 
 ### General etcd health
 
-To run `etcdctl` commands, we need to `exec` into the `etcdctl` container of any
-etcd pod.
-
-```shell
-$ kubectl exec -c etcdctl -n openshift-etcd $(kubectl get po -l app=etcd -oname -n openshift-etcd | awk -F"/" 'NR==1{ print $2 }')
-```
-
-Validate that the `etcdctl` command is available:
+Login to one of the master nodes to validate that the `etcdctl` command is available:
 
 ```shell
 $ etcdctl version
@@ -51,6 +49,8 @@ Run the following command to get the health of etcd:
 ```shell
 $ etcdctl endpoint health -w table
 ```
+
+> TLS args may be added for secure etcd. eg: `--cacert /etc/ssl/etcd/ssl/ca.pem --cert /etc/ssl/etcd/ssl/node-$(hostname).pem --key /etc/ssl/etcd/ssl/node-$(hostname)-key.pem`
 
 ## Mitigation
 
