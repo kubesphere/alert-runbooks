@@ -1,3 +1,8 @@
+---
+title: Etcd High Number Of Failed GRPC Requests
+weight: 20
+---
+
 # etcdHighNumberOfFailedGRPCRequests
 
 ## Meaning
@@ -26,12 +31,11 @@ You can get the instance name from the alert that is firing or by running the
 query detailed above. Those etcd instance logs should serve as further insight
 into what is wrong.
 
-To get logs of etcd containers either check the instance from the alert and
-check logs directly or run the following:
+Usually, in KubeSphere etcd is deployed on master nodes as a service of the master nodes, 
+so login to the master node with the corresponding instance name, and check logs as follows:  
 
 ```shell
-NAMESPACE="kube-etcd"
-kubectl logs -n $NAMESPACE -lapp=etcd etcd
+journalctl -u etcd --no-pager -f
 ```
 
 ## Mitigation

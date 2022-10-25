@@ -1,3 +1,8 @@
+---
+title: Etcd No Leader
+weight: 20
+---
+
 # etcdNoLeader
 
 ## Meaning
@@ -28,13 +33,12 @@ powered and that network connections between each machine are functional.
 
 ### Slow disk issue
 
-Another potential cause could be slow disk, inspect the `Disk Sync
-Duration`dashboard, as well as the `Total Leader Elections Per Day` to get more
-insight and help with diagnosis.
+Another potential cause could be slow disk, 
+the disk-related metrics and dashboards may give you some clues.
 
 ### Other
 
-Check the logs of etcd containers to see any further information and to verify
+Check the logs of etcd to see any further information and to verify
 that etcd does not have leader.
 Logs should contain something like `etcdserver: no leader`.
 

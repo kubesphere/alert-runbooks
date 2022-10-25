@@ -1,3 +1,8 @@
+---
+title: Etcd High Fsync Durations
+weight: 20
+---
+
 # etcdHighFsyncDurations
 
 ## Meaning
@@ -38,7 +43,7 @@ percentile of the `etcd_disk_wal_fsync_duration_seconds_bucket` should be less
 than 10ms. Query in metrics UI:
 
 ```promql
-histogram_quantile(0.99, sum by (instance, le) (irate(etcd_disk_wal_fsync_duration_seconds_bucket{job="etcd"}[5m])))
+histogram_quantile(0.99, sum by (cluster, instance, le) (irate(etcd_disk_wal_fsync_duration_seconds_bucket{job="etcd"}[5m])))
 ```
 
 ## Mitigation
@@ -47,7 +52,7 @@ histogram_quantile(0.99, sum by (instance, le) (irate(etcd_disk_wal_fsync_durati
 
 In the case of slow fisk or when the etcd DB size increases, we can defragment
 existing etcd DB to optimize DB consumption as described in
-[here][etcdDefragmentation]. Run the following command in all etcd pods.
+[here](https://etcd.io/docs/v3.4.0/op-guide/maintenance/). Run the following command in all etcd pods.
 
 ```console
 $ etcdctl defrag
@@ -57,8 +62,7 @@ As validation, check the endpoint status of etcd members to know the reduced
 size of etcd DB. Use for this purpose the same diagnostic approaches as listed
 above. More space should be available now.
 
-Further info on etcd best practices can be found in the [OpenShift docs
-here][etcdPractices].
+Further info on etcd best practices can be found from as follows: 
 
 - [fsync](https://man7.org/linux/man-pages/man2/fsync.2.html)
 - [raft](https://en.wikipedia.org/wiki/Raft_(algorithm)#Log_replication)

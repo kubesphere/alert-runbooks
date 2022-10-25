@@ -1,4 +1,9 @@
-# etcdBackendQuotaLowSpace
+---
+title: Etcd Database Quota Low Space
+weight: 20
+---
+
+# etcdDatabaseQuotaLowSpace
 
 ## Meaning
 
@@ -19,15 +24,7 @@ The following two approaches can be used for the diagnosis.
 
 ### CLI Checks
 
-To run `etcdctl` commands, we need to `rsh` into the `etcdctl` container of any
-etcd pod.
-
-```shell
-$ NAMESPACE="kube-etcd"
-$ kubectl rsh -c etcdctl -n $NAMESPACE $(kubectl get po -l app=etcd -oname -n $NAMESPACE | awk -F"/" 'NR==1{ print $2 }')
-```
-
-Validate that the `etcdctl` command is available:
+Login one of the master nodes, validate that the `etcdctl` command is available:
 
 ```shell
 $ etcdctl version
@@ -38,6 +35,8 @@ $ etcdctl version
 ```shell
 $ etcdctl endpoint status -w table
 ```
+
+> TLS args may be added for secure etcd. eg: `--cacert /etc/ssl/etcd/ssl/ca.pem --cert /etc/ssl/etcd/ssl/node-$(hostname).pem --key /etc/ssl/etcd/ssl/node-$(hostname)-key.pem`
 
 ### PromQL queries
 
@@ -67,7 +66,7 @@ In the meantime before migration happens, you can use defrag to gain some time.
 ### Defrag
 
 When the etcd DB size increases, we can defragment existing etcd DB to optimize
-DB consumption as described in [etcdDefragmentation](https://etcd.io/dkubectls/v3.4.0/op-guide/maintenance/).
+DB consumption as described in [etcdDefragmentation](https://etcd.io/docs/v3.4.0/op-guide/maintenance/).
 Run the following command in all etcd pods.
 
 ```shell
