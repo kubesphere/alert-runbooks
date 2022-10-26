@@ -1,3 +1,8 @@
+---
+title: Etcd GRPC Requests Slow
+weight: 20
+---
+
 # etcdGRPCRequestsSlow
 
 ## Meaning
@@ -41,8 +46,7 @@ histogram_quantile(0.99, sum by (instance, le) (irate(etcd_disk_wal_fsync_durati
 
 #### Console dashboards
 
-In the OpenShift dashboard console under Observe section, select the etcd
-dashboard. There are both RPC rate as well as Disk Sync Duration dashboards
+In KubeSphere console's `cluster status` page under `Monitoring & Alering`, select the `etcd` dashboard. There are both RPC rate as well as Disk Sync Duration dashboards
 which will assist with further issues.
 
 ### Resource exhaustion
@@ -56,24 +60,10 @@ Often if this is the case, we also see
 
 To confirm this is the cause of the slow requests either:
 
-1. In OpenShift console on primary page under "Cluster utilization" view the
-   requested CPU vs available.
+1. In KubeSphere console's `cluster status` page under `Monitoring & Alering`, select the `overview` dashboard and 
+   take a look at the CPU Usage.
 
-2. PromQL query is the following to see top consumers of CPU:
-
-```promql
-      topk(25, sort_desc(
-        sum by (namespace) (
-          (
-            sum(avg_over_time(pod:container_cpu_usage:sum{container="",pod!=""}[5m])) BY (namespace, pod)
-            *
-            on(pod,namespace) group_left(node) (node_namespace_pod:kube_pod_info:)
-          )
-          *
-          on(node) group_left(role) (max by (node) (kube_node_role{role=~".+"}))
-        )
-      ))
-```
+2. In KubeSphere console's `cluster overview`, in the `Resource Usage Ranking` panel you can take a look at the top consumers of CPUs.
 
 ## Mitigation
 
