@@ -1,3 +1,8 @@
+---
+title: Kube API Down
+weight: 20
+---
+
 # KubeAPIDown
 
 ## Meaning
@@ -16,7 +21,7 @@ Check the status of the API server targets in the Prometheus UI.
 
 Then, confirm whether the API is also unresponsive for you:
 
-```console
+```shell
 $ kubectl cluster-info
 ```
 
@@ -24,9 +29,9 @@ If you can still reach the API server, there may be a network issue between the
 Prometheus instances and the API server pods. Check the status of the API server
 pods.
 
-```console
+```shell
 $ kubectl -n kube-system get pods
-$ kubectl -n kube-system logs -l 'app=kube-apiserver'
+$ kubectl -n kube-system logs -l 'component=kube-apiserver'
 ```
 ## Mitigation
 
