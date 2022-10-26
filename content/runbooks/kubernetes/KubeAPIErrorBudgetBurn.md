@@ -60,7 +60,7 @@ If you get results than you know what type of requests are too slow.
 
 Cluster scoped:
 
-```promql
+```promqlpromql
 (
 sum(rate(apiserver_request_duration_seconds_bucket{job="apiserver",le="40",scope="cluster",verb=~"LIST|GET"}[3d]))
 -

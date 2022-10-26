@@ -17,10 +17,15 @@ In cluster services communicating with Kubernetes API may degrade or become unav
 ## Diagnosis
 
 Check when certificate was issued and when it expires.
+
+> The [kubekey](https://github.com/kubesphere/kubekey.git) provides certificate expiration check and please refer to [here](https://github.com/kubesphere/kubekey/blob/master/docs/check-renew-certificate.md#check-certificate-expiration).  
+
 Check serviceAccounts and service account tokens.
 
 ## Mitigation
 
 Update client certificate.
+
+> The [kubekey](https://github.com/kubesphere/kubekey.git) provides certificate refresh and please refer to [here](https://github.com/kubesphere/kubekey/blob/master/docs/check-renew-certificate.md#renew-certificate). 
 
 For in-cluster clients recreate pods.
