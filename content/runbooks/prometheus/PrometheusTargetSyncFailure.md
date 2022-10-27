@@ -19,7 +19,7 @@ Check the logs for the appropriate Prometheus instance:
 ```console
 $ NAMESPACE='<value of namespace label from alert>'
 
-$ oc -n $NAMESPACE logs -l 'app=prometheus'
+$ kubectl -n <namespace> logs -l 'prometheus=k8s'
 level=error ... msg="Creating target failed" ...
 ```
 
