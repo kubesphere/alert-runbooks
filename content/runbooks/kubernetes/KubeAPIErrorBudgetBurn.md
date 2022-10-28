@@ -1,8 +1,13 @@
+---
+title: Kube API Error Budget Burn
+weight: 20
+---
+
 # KubeAPIErrorBudgetBurn
 
 ## Impact
 
-The overall availability of your Kubernetes cluster isn't guaranteed anymore.
+The overall availability of your Kubernetes cluster isn't guaranteed any more.
 There may be **too many errors** returned by the APIServer and/or **responses take too long** for guarantee proper reconciliation.
 
 **This is always important; the only deciding factor is how urgent it is at the current rate**
@@ -53,7 +58,7 @@ If you don't get any results back then there aren't too many slow requests - tha
 If you get results than you know what type of requests are too slow.
 
 Cluster scoped:
-```
+```promql
 (
 sum(rate(apiserver_request_duration_seconds_bucket{job="apiserver",le="40",scope="cluster",verb=~"LIST|GET"}[3d]))
 -
@@ -64,7 +69,7 @@ sum(rate(apiserver_request_total{job="apiserver",verb=~"LIST|GET"}[3d]))
 > 0.01
 ```
 Namespace scoped:
-```
+```promql
 (
 sum(rate(apiserver_request_duration_seconds_bucket{job="apiserver",le="5",scope="namespace",verb=~"LIST|GET"}[3d]))
 -
@@ -76,7 +81,7 @@ sum(rate(apiserver_request_total{job="apiserver",verb=~"LIST|GET"}[3d]))
 ```
 
 Resource scoped:
-```
+```promql
 (
 sum(rate(apiserver_request_duration_seconds_bucket{job="apiserver",le="1",scope=~"resource|",verb=~"LIST|GET"}[3d])) or vector(0)
 -
@@ -89,7 +94,7 @@ sum(rate(apiserver_request_total{job="apiserver",verb=~"LIST|GET"}[3d]))
 
 #### Slow Write Requests
 
-```
+```promql
 (
 sum(rate(apiserver_request_duration_seconds_count{job="apiserver",verb=~"POST|PUT|PATCH|DELETE"}[3d]))
 -
