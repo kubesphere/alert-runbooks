@@ -50,3 +50,6 @@ Depending on the conditions usually adding new nodes solves the issue.
 Otherwise probably deployment or HPA definition needs to be fixed.
 
 See [Debugging Pods](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application/#debugging-pods)
+
+This may occur when there are not enough resources in the cluster to schedule.
+Check resource utilization, and add capacity as necessary.

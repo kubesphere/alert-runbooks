@@ -40,3 +40,6 @@ Service degradation or unavailability.
 TODO
 
 See [Debugging Pods](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application/#debugging-pods)
+
+## Mitigation
+Check various configurations, if correct, please wait.
