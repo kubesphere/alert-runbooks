@@ -1,11 +1,11 @@
-baseURL: "https://runbooks.prometheus-operator.dev"
+baseURL: "https://alert-runbooks.kubesphere.io"
 languageCode: "en-us"
-title: "kube-prometheus runbooks"
+title: "KubeSphere alert runbooks"
 
 theme: book
 
 params:
-  BookRepo: "https://github.com/prometheus-operator/runbooks"
+  BookRepo: "https://github.com/kubesphere/alert-runbooks"
   BookEditPath: "edit/main"
   BookSearch: true
   BookSection: "runbooks"
