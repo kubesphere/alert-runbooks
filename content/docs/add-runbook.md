@@ -85,4 +85,4 @@ To test your changes locally:
 
 1. Install [Hugo](https://gohugo.io/getting-started/installing/)
 2. Run `git submodule init` and `git submodule update` to clone the Hugo theme
-3. Run `hugo server` and navigate to http://localhost:1313/ in your browser
+3. Run `make run` and navigate to http://localhost:1313/ in your browser

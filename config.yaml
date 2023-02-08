@@ -1,5 +1,5 @@
 baseURL: "https://alert-runbooks.kubesphere.io"
-languageCode: "en-us"
+# languageCode: "en-us"
 title: "KubeSphere alert runbooks"
 
 theme: book
@@ -11,8 +11,22 @@ params:
   BookSection: "runbooks"
   #BookMenuBundle: "/menu"
 
+languages:
+  en:
+    languageName: English
+    contentDir: content-pre-processed/content
+    title: KubeSphere alert runbooks
+    weight: 1
+  zh:
+    languageName: Chinese
+    contentDir: content-pre-processed/content.zh
+    title: KubeSphere 告警参考书
+    weight: 2
+
 markup:
   goldmark:
     renderer:
       # Allows rendering HTML tags. This would only be truly "unsafe" if we were accepting untrusted user input and rendering it, which we aren't.
       unsafe: true
+
+BookTranslatedOnly: true

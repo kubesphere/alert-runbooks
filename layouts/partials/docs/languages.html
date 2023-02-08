@@ -1,0 +1,15 @@
+{{ $currentLang := .Site.Language.Lang }}
+{{ $currentPageUrl := .RelPermalink }}
+
+<div>
+  <img src="{{ "svg/translate.svg" | relURL }}" class="book-icon" alt="Languages" width="16" height="16"/>
+  <select onchange="location.pathname=this.value">
+    {{ range $.Site.Home.AllTranslations }}
+    <option value="{{ if (ne .Language.Lang "en") }}/{{ .Language.Lang }}{{ end }}
+      {{- if (eq $currentLang "en") }}{{ $currentPageUrl }}{{ else }}{{ strings.TrimPrefix (printf "/%s" $currentLang) $currentPageUrl }}{{ end }}" 
+      {{ if (eq .Language.Lang $.Site.Language.Lang) }} selected="selected"{{ end }}>
+      {{ .Language.LanguageName }}
+    </option>
+    {{ end }}
+  </select>
+</div>
