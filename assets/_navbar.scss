@@ -1,0 +1,25 @@
+.navbar {
+  position: relative;
+  width: 100%;
+  height: $navbar-height;
+  padding: 0 $padding-16;
+  background: var(--body-background);
+  z-index:10;
+  margin: 0 auto;
+  max-width: $navbar-max-width;
+  display: flex;
+  flex-wrap: wrap; // allow us to do the line break for collapsing content
+  align-items: center;
+  justify-content: space-between; // space out brand from logo
+  border-bottom: 2px solid gainsboro;
+}
+
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  li {
+    display: inline-flex;
+    margin: 0 0.5rem;
+  }
+}
+

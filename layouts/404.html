@@ -17,7 +17,16 @@
     </style>
   </head>
 
-  <body>
+  <script>
+    function onloadFor404() {
+      if (location.pathname.startsWith("/runbooks") 
+        || location.pathname.startsWith("/docs")) {
+        location.pathname = "/latest" + location.pathname;
+      }
+    }
+  </script>
+
+  <body onload="onloadFor404()">
     <main class="flex justify-center not-found">
       <div>
         <h1>404</h1>

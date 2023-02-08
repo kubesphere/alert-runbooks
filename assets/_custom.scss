@@ -1,0 +1,40 @@
+$navbar-height: 2.5rem !default;
+$navbar-max-width: $container-max-width;
+
+.container {
+  margin: 0.5rem auto
+}
+
+.book-menu {
+  .book-menu-content {
+    top: $navbar-height;
+    padding-top: 1rem;
+  }
+}
+
+.book-toc {
+  .book-toc-content {
+    top: $navbar-height;
+  }
+}
+
+.book-top {
+  font-size: $font-size-14;
+}
+
+.book-versions {
+  margin-block-end: $padding-16 * 2;
+
+  .book-icon {
+    height: 1em;
+    width: 1em;
+    margin-inline-end: .5em;
+  }
+
+  ul {
+    padding-inline-start: 1.5em;
+  }
+}
+
+@import "navbar";
+

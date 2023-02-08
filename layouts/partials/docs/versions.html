@@ -1,0 +1,15 @@
+{{ $currentVersion := .Section }}
+{{ $currentLang := .Site.Language.Lang }}
+
+<div>
+  <img src="{{ "svg/version.svg" | relURL }}" class="book-icon" width="16" height="16"/>
+  <select onchange="location.pathname=this.value">
+    {{ range .Site.Sections.Reverse }}
+    {{- $version := .Section }}
+    <option value="{{ if (ne $currentLang "en") }}/{{ $currentLang }}{{ end }}/{{ $version }}" 
+        {{ if (eq $version $currentVersion) }} selected="selected"{{ end }}>
+      {{ $version }}
+    </option>
+    {{ end }}
+  </select>
+</div>
