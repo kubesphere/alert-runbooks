@@ -2,7 +2,7 @@
 {{ $currentPageUrl := .RelPermalink }}
 
 <div>
-  <img src="{{ "svg/translate.svg" | relURL }}" class="book-icon" alt="Languages" width="16" height="16"/>
+  <!-- <img src="{{ "svg/translate.svg" | relURL }}" class="book-icon" alt="Languages" width="16" height="16"/> -->
   <select onchange="location.pathname=this.value">
     {{ range $.Site.Home.AllTranslations }}
     <option value="{{ if (ne .Language.Lang "en") }}/{{ .Language.Lang }}{{ end }}

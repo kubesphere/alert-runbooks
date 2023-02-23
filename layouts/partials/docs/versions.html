@@ -2,7 +2,7 @@
 {{ $currentLang := .Site.Language.Lang }}
 
 <div>
-  <img src="{{ "svg/version.svg" | relURL }}" class="book-icon" width="16" height="16"/>
+  <!-- <img src="{{ "svg/version.svg" | relURL }}" class="book-icon" width="16" height="16"/> -->
   <select onchange="location.pathname=this.value">
     {{ range .Site.Sections.Reverse }}
     {{- $version := .Section }}
